@@ -1,8 +1,9 @@
 
 <?php
-$dsn = "mysql:host=sql202.infinityfree.com;dbname=if0_39172782_ecommerce";
-$user = "if0_39172782";
-$pass = "bvgXLqLoShWh2o4";
+$dsn = "mysql:host=" . getenv("DB_HOST") . ";dbname=" . getenv("DB_NAME");
+$user = getenv("DB_USER");
+$pass = getenv("DB_PASSWORD");
+
 $option = array(
    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8"
 );

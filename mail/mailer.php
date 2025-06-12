@@ -9,23 +9,22 @@ use PHPMailer\PHPMailer\Exception;
 require __DIR__ . '/../PHPMailer/PHPMailer.php';
 require __DIR__ . '/../PHPMailer/smtp.php';
 require __DIR__ . '/../PHPMailer/Exception.php';
-
 function sendEmail($to, $subject, $body, $altBody = '') {
     $mail = new PHPMailer(true);
 
     try {
         $mail->isSMTP();
-        $mail->Host       = 'smtp-relay.brevo.com';
+        $mail->Host       = getenv("MAIL_HOST");
         $mail->SMTPAuth   = true;
         $mail->AuthType   = 'PLAIN';
-        $mail->Username   = '8f0c0d001@smtp-brevo.com';
-        $mail->Password   = '6awjRz0CIAHtNM4V';
+        $mail->Username   = getenv("MAIL_USERNAME");
+        $mail->Password   = getenv("MAIL_PASSWORD");
         $mail->SMTPSecure = 'tls';
-        $mail->Port       = 587;
+        $mail->Port       = getenv("MAIL_PORT");
 
-        $mail->setFrom('mhamad.nabhan.222@outlook.com', 'Your Name');
+        $mail->setFrom(getenv("MAIL_FROM_EMAIL"), getenv("MAIL_FROM_NAME"));
         $mail->addAddress($to);
-        $mail->addReplyTo('mhamad.nabhan.222@outlook.com', 'Mhamad');
+        $mail->addReplyTo(getenv("MAIL_FROM_EMAIL"), getenv("MAIL_FROM_NAME"));
 
         $mail->isHTML(true);
         $mail->Subject = $subject;
