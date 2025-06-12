@@ -143,10 +143,10 @@ function checkAuthenticate()
 function printFailure($message = "none"){
     echo json_encode(array("status" => "failure","message" => $message));
 }
-function sendEmail($to, $subject, $message) {
-    $headers = "From: mhamadnabhan6@gmail.com\r\n";
-    $headers .= "CC: mohamadalnabhan000@gmail.com\r\n";
+// function sendEmail($to, $subject, $message) {
+//     $headers = "From: mhamadnabhan6@gmail.com\r\n";
+//     $headers .= "CC: mohamadalnabhan000@gmail.com\r\n";
 
-    mail($to, $subject, $message, $headers);
-    echo " email sent succesfully 1";
-}
+//     mail($to, $subject, $message, $headers);
+//     echo " email sent succesfully 1";
+// }

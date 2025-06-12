@@ -1,7 +1,8 @@
+
 <?php
-$dsn = "mysql:host=localhost;dbname=e-commerce";
-$user = "root";
-$pass = "";
+$dsn = "mysql:host=sql202.infinityfree.com;dbname=if0_39172782_ecommerce";
+$user = "if0_39172782";
+$pass = "bvgXLqLoShWh2o4";
 $option = array(
    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8"
 );
@@ -19,3 +20,26 @@ try {
 } catch (PDOException $e) {
    echo $e->getMessage();
 }
+?>
+<?php
+// $dsn = "mysql:host=localhost;dbname=e-commerce"; // Adjust DB name
+// $user = "root";
+// $pass = "";
+// $option = array(
+//    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8"
+// );
+// $countrowinpage = 9;
+// try {
+//    $con = new PDO($dsn, $user, $pass, $option);
+//    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//    header("Access-Control-Allow-Origin: *");
+//    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, Access-Control-Allow-Origin");
+//    header("Access-Control-Allow-Methods: POST, OPTIONS , GET");
+//    include "functions.php";
+//    if (!isset($notAuth)) {
+//       // checkAuthenticate();
+//    }
+// } catch (PDOException $e) {
+//    echo $e->getMessage();
+// }
+?>

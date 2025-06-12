@@ -1,17 +1,17 @@
 <?php
 include "../connect.php";
-
+include "../mail/mailer.php" ;
 $username = filterRequest("username") ;
 $phone = filterRequest("phone") ;
 $email = filterRequest("email");
 $password = sha1("password") ;
-$verifyCode = "0" ; 
+$verifyCode = rand(10000,99999) ; 
 
 $stmt =$con-> prepare("SELECT * FROM users WHERE `users_email` = ? OR `users_phone` = ?");
 $stmt -> execute(array($email , $phone));
 $count = $stmt->rowCount();
 
-if($count > 1){
+if($count > 0){
    printFailure("error happened with email or phone number") ;
 }else{
     $data =  array(
@@ -21,6 +21,7 @@ if($count > 1){
     "users_password" => $password ,
     "users_verifycode" => $verifyCode 
     );
+    sendEmail($email ,"Verification code Test " , " Verification code $verifyCode");
     insertData("users" , $data);
 }
 
