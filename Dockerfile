@@ -1,13 +1,16 @@
 FROM php:8.1-apache
 
-# Install required extensions
+# Install necessary PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql mysqli
 
-# Enable Apache mod_rewrite
+# Enable Apache modules
 RUN a2enmod rewrite
 
-# Copy your code
+# Optional: Set ServerName to suppress warning
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+# Copy source code
 COPY . /var/www/html
 
-# Set correct ownership
+# Set proper ownership
 RUN chown -R www-data:www-data /var/www/html
