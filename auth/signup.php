@@ -21,7 +21,11 @@ if($count > 0){
     "users_password" => $password ,
     "users_verifycode" => $verifyCode 
     );
-    sendEmail($email ,"Verification code Test " , " Verification code $verifyCode");
+    $sent = sendEmail($email ,"Verification code Test", "Verification code $verifyCode");
+
+    if (!$sent) {
+    error_log("❌ sendEmail failed for $email");
+}
     insertData("users" , $data);
 }
 
