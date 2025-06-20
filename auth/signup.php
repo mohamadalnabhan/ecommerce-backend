@@ -4,7 +4,7 @@ include "../mail/mailer.php" ;
 $username = filterRequest("username") ;
 $phone = filterRequest("phone") ;
 $email = filterRequest("email");
-$password = sha1("password") ;
+$password = sha1($_POST['password']) ;
 $verifyCode = rand(10000,99999) ; 
 
 $stmt =$con-> prepare("SELECT * FROM users WHERE `users_email` = ? OR `users_phone` = ?");
