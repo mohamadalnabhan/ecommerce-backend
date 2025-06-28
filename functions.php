@@ -12,7 +12,12 @@ function getAllData($table, $where = null, $values = null)
 {
     global $con;
     $data = array();
+    if($where == null){
+    $stmt = $con->prepare("SELECT  * FROM $table");
+    }else{
     $stmt = $con->prepare("SELECT  * FROM $table WHERE   $where ");
+    }
+   
     $stmt->execute($values);
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $count  = $stmt->rowCount();
