@@ -29,7 +29,8 @@ function getAllData($table, $where = null, $values = null , $json = true)
     }
     }else{
           if ($count > 0){
-        echo $data ; 
+        return $data;
+
     } else {
         echo json_encode(array("status" => "failure"));
     }
