@@ -1,15 +1,12 @@
 <?php
 include "connect.php";
 
-
 $getDataArray = array(); 
 
-$categories = getAllData("categories" , null , null , false);
+$categories = getAllData("categories", null, null, false);
 
+$getDataArray['categories'] = $categories;
 
-$getDataArray['categories'] = $categories ;  // ['categories is a key']
-
-
+header("Content-Type: application/json"); // optional, makes it return JSON properly
 echo json_encode($getDataArray);
-
 ?>
