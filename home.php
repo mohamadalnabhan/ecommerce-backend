@@ -10,6 +10,10 @@ $getDataArray['categories'] = $categories;
 
 $items = getAllData("items" , "`items_discount` != 0 " , null , false);
 $getDataArray['items'] = $items;
-echo json_encode($getDataArray);
+echo json_encode([
+  "status" => "success",
+  "categories" => $categories,
+  "items" => $items
+], JSON_UNESCAPED_UNICODE);
 
 ?>
