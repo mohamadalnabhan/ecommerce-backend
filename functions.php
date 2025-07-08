@@ -25,14 +25,14 @@ function getAllData($table, $where = null, $values = null , $json = true)
           if ($count > 0){
         echo json_encode(array("status" => "success", "data" => $data));
     } else {
-        echo json_encode(array("status" => "failure"));
+       echo json_encode(array("status" => "failure", "data" => [])); // ✅ always return "data"
     }
     }else{
           if ($count > 0){
         return $data;
 
     } else {
-        echo json_encode(array("status" => "failure"));
+         echo json_encode(array("status" => "failure", "data" => [])); // ✅ fix here too
     }
     }
     return $count;
