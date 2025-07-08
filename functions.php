@@ -5,7 +5,13 @@ define("MB", 1048576);
 
 function filterRequest($requestname)
 {
-  return  htmlspecialchars(strip_tags($_POST[$requestname]));
+  if (isset($_POST[$requestname])) {
+    return htmlspecialchars(strip_tags($_POST[$requestname]));
+  } elseif (isset($_GET[$requestname])) {
+    return htmlspecialchars(strip_tags($_GET[$requestname]));
+  } else {
+    return null; // or "" if you prefer
+  }
 }
 
 function getAllData($table, $where = null, $values = null , $json = true)
