@@ -7,41 +7,36 @@ function filterRequest($requestname)
 {
   return  htmlspecialchars(strip_tags($_POST[$requestname]));
 }
-function getAllData($table, $where = null, $values = null, $json = true)
+
+function getAllData($table, $where = null, $values = null , $json = true)
 {
     global $con;
-    $data = [];
-
-    try {
-        if ($where == null) {
-            $stmt = $con->prepare("SELECT * FROM $table");
-            $stmt->execute();
-        } else {
-            $stmt = $con->prepare("SELECT * FROM $table WHERE $where");
-            $stmt->execute($values ?? []);
-        }
-
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $count = $stmt->rowCount();
-
-        if ($json) {
-            if ($count > 0) {
-                echo json_encode(["status" => "success", "data" => $data]);
-            } else {
-                echo json_encode(["status" => "failure", "message" => "No data found"]);
-            }
-        } else {
-            return $count > 0 ? $data : [];
-        }
-
-        return $count;
-
-    } catch (PDOException $e) {
-        echo json_encode(["status" => "failure", "error" => $e->getMessage()]);
-        return 0;
+    $data = array();
+    if($where == null){
+    $stmt = $con->prepare("SELECT  * FROM $table");
+    }else{
+    $stmt = $con->prepare("SELECT  * FROM $table WHERE   $where ");
     }
-}
+   
+    $stmt->execute($values);
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $count  = $stmt->rowCount();
+    if($json == true){
+          if ($count > 0){
+        echo json_encode(array("status" => "success", "data" => $data));
+    } else {
+        echo json_encode(array("status" => "failure"));
+    }
+    }else{
+          if ($count > 0){
+        return $data;
 
+    } else {
+        echo json_encode(array("status" => "failure"));
+    }
+    }
+    return $count;
+}
 
 function getData($table, $where = null, $values = null)
 {
