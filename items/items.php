@@ -10,6 +10,6 @@ include "../connect.php";
 
 $categories_id = filterRequest("id");
 
-getAllData("items1view", "`categories_id` = $categories_id", null, true);
+getAllData("items1view", "categories_id = $categories_id");
 
 ob_end_flush(); // ✅ flush output
