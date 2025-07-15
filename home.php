@@ -8,7 +8,7 @@ $categories = getAllData("categories", null, null, false);
 $getDataArray['categories'] = $categories;
 
 
-$items = getAllData("items1view" , "`items_discount` != 0 " , null , false);
+$items = getAllData("items2view" , "`items_discount` != 0 " , null , false);
 $getDataArray['items'] = $items;
 echo json_encode([
   "status" => "success",
