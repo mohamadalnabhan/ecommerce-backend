@@ -1,18 +1,23 @@
 <?php
-include "../connect.php";
+
+include "../connect.php" ;
+
 
 $userid = filterRequest("userid");
-$itemsid = filterRequest("itemid"); // ✅ Make sure this matches what's sent from Flutter
+$itemsid = filterRequest("itemsid");
 
 $data = array(
-    "favorite_usersid" => $userid,
-    "favorite_itemsid" => $itemsid,
+    "favorite_userid" =>$userid , 
+    "favorite_itemsid" => $itemsid ,
+
 );
 
-$result = insertData("favorite", $data);
 
-if ($result > 0) {
-    echo json_encode(["status" => "success"]);
-} else {
-    echo json_encode(["status" => "failure"]);
-}
+insertData("favorite" , $data);
+
+
+
+
+
+
+?>
