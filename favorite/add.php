@@ -22,11 +22,7 @@ if ($exists > 0) {
 
     $result = insertData("favorite", $data); // Assuming insertData returns affected rows (>0 on success)
 
-    if ($result > 0) {
-        echo json_encode(["status" => "success", "message" => "Item added to favorites"]);
-    } else {
-        echo json_encode(["status" => "fail", "message" => "Failed to add item to favorites"]);
-    }
+
 }
 exit(); // Crucial: terminate script immediately after JSON output
 ?>
