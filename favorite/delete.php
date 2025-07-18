@@ -1,14 +1,9 @@
-<?php
-// favDelete.php
-include "../connect.php"; // Ensure this file only establishes connection and nothing else
+<?php 
 
-// Assuming filterRequest function is defined
-$userid = filterRequest("userid");
-$itemid = filterRequest("itemid"); // Using 'itemid' consistently
+include "../connect.php" ; 
 
-// Perform the deletion
-$countdelete = deleteData("favorite", "favorite_usersid = ? AND favorite_itemsid = ?", array($userid, $itemid)); // Assuming deleteData returns affected rows (>0 on success)
+$usersid = filterRequest("userid") ; 
+$itemsid = filterRequest("itemid") ; 
 
-
-exit(); // Crucial: terminate script immediately after JSON output
-?>
+deleteData("favorite" , "favorite_usersid = $userid AND favorite_itemsid = $item
+id") ; 
