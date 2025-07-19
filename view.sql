@@ -18,3 +18,10 @@ SELECT items2view.*, 1 AS favorite
         FROM favorite
         WHERE favorite.favorite_usersid = ?
     )
+
+    
+CREATE OR REPLACE VIEW MyFavorite AS 
+SELECT favorite.*, items.*, users.users_id 
+FROM favorite
+INNER JOIN users ON users.users_id = favorite.favorite_usersid
+INNER JOIN items ON items.items_id = favorite.favorite_itemsid;
