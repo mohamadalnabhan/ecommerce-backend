@@ -7,4 +7,4 @@ $userid = filterRequest("userid");
 
 getAllData("MyFavorite" , "favorite_usersid = ?",array($userid)); 
 
-?>
+?>  
