@@ -2,6 +2,7 @@
 
 
 include "../connect.php";
+include "../mail/mailer.php" ;
 
 
 $verifyCode = rand(10000,99999) ; 
