@@ -1,18 +1,18 @@
 <?php
-// favDelete.php
-include "../connect.php"; // Ensure this file only establishes connection and nothing else
+include "../connect.php";
 
-// Assuming filterRequest function is defined in connect.php or an included utility
 $userid = filterRequest("userid");
-$itemid = filterRequest("itemid"); // Using 'itemid' consistently
-   
+$itemid = filterRequest("itemid");
 
+// Step 1: Select cart_id safely
+$stmt = $con->prepare("SELECT cart_id FROM cart WHERE cart_userid = ? AND cart_itemid = ? LIMIT 1");
+$stmt->execute([$userid, $itemid]);
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
-
-
-
-deleteData("cart" , "cart_id  = (SELECT cart_id FROM cart WHERE cart_userid = $userid AND cart_itemid = $itemid LIMIT 1)"); 
-
-
-?>
+// Step 2: If found, delete using the ID
+if ($row) {
+    $cartId = $row['cart_id'];
+    deleteData("cart", "cart_id = $cartId");
+} else {
+    printFailure("Cart item not found");
+}
