@@ -7,7 +7,7 @@ $userid = filterRequest("userid");
 $itemid = filterRequest("itemid"); // Using 'itemid' consistently
 
 
-$count = getData("cart" ,"cart_itemsid = $itemid AND cart_userid = $userid" );
+$count = getData("cart" ,"cart_itemid = $itemid AND cart_userid = $userid" );
 
 $data = array(
     "cart_userid" => $userid ,
