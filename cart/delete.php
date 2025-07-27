@@ -12,7 +12,7 @@ $itemid = filterRequest("itemid"); // Using 'itemid' consistently
 
 
 
-deleteData("cart" , "cart_id = {SELECT * FROM cart WHERE cart_userid = $userid AND cart_itemid = $itemid  LIMIT 1");
+deleteData("cart" , "cart_id  = (SELECT cart_id FROM cart WHERE cart_usersid = $userid AND cart_itemsid = $itemid LIMIT 1)"); 
 
 
 ?>
