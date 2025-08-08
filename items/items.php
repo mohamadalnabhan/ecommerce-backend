@@ -19,23 +19,30 @@ include "../connect.php";
 
 $categories_id = filterRequest("id");
 $userid = filterRequest("userid");
-
 $stmt = $con->prepare("
-    SELECT items2view.*, 1 AS favorite
+    SELECT 
+        items2view.*, 
+        1 AS favorite, 
+        ROUND(items_price - (items_price * items_discount / 100), 2) AS itemsPriceDiscount
     FROM items2view
-    INNER JOIN favorite ON favorite.favorite_itemsid = items2view.items_id
-    WHERE favorite.favorite_usersid = ? AND items2view.categories_id = ?
+    INNER JOIN favorite 
+        ON favorite.favorite_itemsid = items2view.items_id
+    WHERE favorite.favorite_usersid = ? 
+      AND items2view.categories_id = ?
 
     UNION ALL
 
-    SELECT items2view.*, 0 AS favorite
+    SELECT 
+        items2view.*, 
+        0 AS favorite, 
+        ROUND(items_price - (items_price * items_discount / 100), 2) AS itemsPriceDiscount
     FROM items2view
     WHERE items2view.categories_id = ?
-    AND items2view.items_id NOT IN (
-        SELECT favorite.favorite_itemsid
-        FROM favorite
-        WHERE favorite.favorite_usersid = ?
-    )
+      AND items2view.items_id NOT IN (
+          SELECT favorite.favorite_itemsid
+          FROM favorite
+          WHERE favorite.favorite_usersid = ?
+      )
 ");
 
 $stmt->execute([$userid, $categories_id, $categories_id, $userid]);
