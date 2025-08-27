@@ -3,7 +3,7 @@ include "../connect.php";
 
 
 
-$coupon = filterRequest("coupon");
+$coupon = filterRequest("couponName");
 
 $now = date("Y-m-d H:i:s");
 
