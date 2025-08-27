@@ -5,7 +5,7 @@
  $userid = filterRequest("userid") ; 
  $itemid = filterRequest("itemid") ; 
 
- $stmt = $con->prepare("SELECT COUNT(cart.cart_id) as countitems  FROM `cart` WHERE cart_userid = $userid AND cart_itemid  =  $itemid");
+ $stmt = $con->prepare("SELECT COUNT(cart.cart_id) as countitems  FROM `cart` WHERE cart_userid = $userid AND cart_itemid  =  $itemid AND cart_orders = 0");
  $stmt->execute() ; 
 
  $count = $stmt->rowCount() ; 
