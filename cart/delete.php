@@ -5,7 +5,7 @@ $userid = filterRequest("userid");
 $itemid = filterRequest("itemid");
 
 // Step 1: Select cart_id safely
-$stmt = $con->prepare("SELECT cart_id FROM cart WHERE cart_userid = ? AND cart_itemid = ? LIMIT 1 AND cart_orders = 0");
+$stmt = $con->prepare("SELECT cart_id FROM cart WHERE cart_userid = ? AND cart_itemid = ? AND cart_orders = 0 LIMIT 1 " );
 $stmt->execute([$userid, $itemid]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
