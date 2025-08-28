@@ -5,14 +5,22 @@ $userid = filterRequest("userid");
 $itemid = filterRequest("itemid");
 
 // Step 1: Select cart_id safely
-$stmt = $con->prepare("SELECT cart_id FROM cart WHERE cart_userid = ? AND cart_itemid = ? AND cart_orders = 0 LIMIT 1 " );
+$stmt = $con->prepare("SELECT cart_id FROM cart 
+                       WHERE cart_userid = ? 
+                         AND cart_itemid = ? 
+                         AND cart_orders = 0 
+                       LIMIT 1");
 $stmt->execute([$userid, $itemid]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Step 2: If found, delete using the ID
 if ($row) {
     $cartId = $row['cart_id'];
-    deleteData("cart", "cart_id = $cartId");
+    
+    // use deleteData with placeholder
+    deleteData("cart", "cart_id = ?", [$cartId]);
+
+    echo json_encode(["status" => "success"]);
 } else {
     printFailure("Cart item not found");
 }
