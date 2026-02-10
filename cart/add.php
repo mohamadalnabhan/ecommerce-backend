@@ -1,7 +1,7 @@
 <?php
 include "../connect.php";
 
-ob_clean(); // 🔥 Prevent accidental output
+
 
 $userid = filterRequest("userid");
 $itemid = filterRequest("itemid");
@@ -16,7 +16,7 @@ $count = getData(
 
 // OPTIONAL: prevent duplicates
 if ($count > 0) {
-    echo json_encode(["status" => "exists"]);
+    echo json_encode(["status" => "success"]);
     exit;
 }
 
