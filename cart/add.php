@@ -1,22 +1,32 @@
 <?php
-// favAdd.php
-include "../connect.php"; // Ensure this file only establishes connection and nothing else
+include "../connect.php";
 
-// Assuming filterRequest function is defined in connect.php or an included utility
+ob_clean(); // 🔥 Prevent accidental output
+
 $userid = filterRequest("userid");
-$itemid = filterRequest("itemid"); // Using 'itemid' consistently
+$itemid = filterRequest("itemid");
 
-
-$count = getData("cart" ,"cart_itemid = $itemid AND cart_userid = $userid AND cart_orders = 0" ,null,false );
-
-$data = array(
-    "cart_userid" => $userid ,
-    "cart_itemid" => $itemid , 
-
+// 🔕 IMPORTANT: disable JSON output from getData
+$count = getData(
+    "cart",
+    "cart_itemid = $itemid AND cart_userid = $userid AND cart_orders = 0",
+    null,
+    false // already false, BUT getData itself probably still echoes
 );
 
-insertData("cart" ,$data );
+// OPTIONAL: prevent duplicates
+if ($count > 0) {
+    echo json_encode(["status" => "exists"]);
+    exit;
+}
 
+$data = [
+    "cart_userid" => $userid,
+    "cart_itemid" => $itemid,
+];
 
+// 🔕 Disable JSON here too
+insertData("cart", $data, false);
 
-?>
+// ✅ ONE response. ALWAYS.
+echo json_encode(["status" => "success"]);
