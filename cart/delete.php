@@ -1,9 +1,14 @@
 <?php
+include "../connect.php";
 
+// Use consistent parameter names with add.php
+$userid = filterRequest("userid");
+$itemid = filterRequest("itemid");
 
-include "../connect.php" ; 
+// Fix 1: Use correct column name 'cart_userid' not 'cart_usersid'
+// Fix 2: Delete directly without subquery
+$conditions = "cart_userid = ? AND cart_itemid = ? AND cart_orders = 0";
+$params = array($userid, $itemid);
 
-$usersid = filterRequest("usersid");
-$itemsid = filterRequest("itemsid");
-
-deleteData("cart" , "cart_id  = (SELECT cart_id FROM cart WHERE cart_usersid = $usersid AND cart_itemid = $itemsid AND cart_orders = 0 LIMIT 1) "); 
+// If you have deleteData function
+deleteData("cart", $conditions, $params);
