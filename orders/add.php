@@ -16,7 +16,7 @@ $orders_paymentmethod = filterRequest("orders_paymentmethod");
 error_log("Received parameters: " . json_encode($_POST));
 
 // Validate required parameters
-if (!$orders_userid) {
+if ($orders_userid === null || $orders_userid === ""){
     echo json_encode(array("status" => "error", "message" => "orders_userid is missing"));
     exit;
 }
