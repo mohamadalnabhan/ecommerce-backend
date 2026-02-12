@@ -18,7 +18,7 @@ $data = array(
     "orders_address" => $orders_address,
     "orders_pricedelivery" => $orders_pricedelivery,
     "orders_price" => $orders_price,
-    "coupon_id" => $coupon_id,
+    "orders_coupons" => $coupon_id,
     "orders_paymentmethod" => $orders_paymentmethod, 
     
 ) ; 
