@@ -30,8 +30,7 @@ if($count > 0){
     $stmt ->execute() ; 
     $maxid= $stmt->fetchColumn() ;
     $data=array("cart_orders" =>$maxid);
-
-    updateData("cart" , $data , "cart_userid = $userid AND cart_orders = 0");
+updateData("cart" , $data , "cart_userid = $orders_userid AND cart_orders = 0");
 }
 
 
