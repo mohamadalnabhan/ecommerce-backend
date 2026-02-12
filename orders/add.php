@@ -9,7 +9,7 @@ $orders_address = filterRequest("orders_address") ;
 $orders_pricedelivery = filterRequest("orders_pricedelivery");
 $orders_price = filterRequest("orders_price");
 $coupon_id = filterRequest("coupon_id");
-$orders_paymentmethod= filterRequest("orders_paymentmethod	");
+$orders_paymentmethod= filterRequest("orders_paymentmethod");
 
 
 $data = array(
