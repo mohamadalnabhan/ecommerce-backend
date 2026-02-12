@@ -3,14 +3,6 @@
 include "../connect.php";
 
 // Get parameters - support both POST and GET
-function filterRequest($requestname) {
-    if (isset($_POST[$requestname])) {
-        return $_POST[$requestname];
-    } elseif (isset($_GET[$requestname])) {
-        return $_GET[$requestname];
-    }
-    return null;
-}
 
 $orders_userid = filterRequest("orders_userid");
 $orders_type = filterRequest("orders_type");
